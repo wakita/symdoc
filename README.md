@@ -67,7 +67,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 '/Users/wakita/.local/lib/python3.5/site-packages'
 ```
 
-        私の環境では、`/Users/wakita/.local/lib/python3.5/site-packages` だということがわかります。このディレクトリが存在しなかったら作成して下さい。
+    私の環境では、`/Users/wakita/.local/lib/python3.5/site-packages` だということがわかります。このディレクトリが存在しなかったら作成して下さい。
 
     1. 今、見つかったディレクトリに `symdoc.pth` という名前のテキストファイルを作成し、そこに `sympy` をインストールしたディレクトリパスを記載します。私の環境の場合は以下のようになります。
 
