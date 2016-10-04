@@ -56,7 +56,8 @@ JSSST 大会発表に関するプロジェクトです。
 1. 展開した SymPy を Python3 が読み込めるように設定します。
 
     1. まず、Python を起動し、以下の要領でサイトの構造を調べます。
-        ```
+
+    ```
     ☁  symdoc  python
 Python 3.5.2 |Continuum Analytics, Inc.| (default, Jul  2 2016, 17:52:12)
 [GCC 4.2.1 Compatible Apple LLVM 4.2 (clang-425.0.28)] on darwin
