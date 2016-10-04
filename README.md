@@ -1,9 +1,12 @@
 # symdoc
 Document Synthesis Project Based on Symbolic Algebra System
 
-JSSST 大会発表に関するプロジェクトです。近日（たぶん、帰京の新幹線のなかで）、公開予定。
+JSSST 大会発表に関するプロジェクトです。
 
-- 汎用 Newton-Raphson 法
+- [汎用 Newton-Raphson 法](https://github.com/wakita/symdoc/blob/master/kk.ipynb)
+
+近日公開予定。
+
 - 力学モデルに基づいた無向グラフ可視化システム (Kamada-Kawai法)
 
 # 調整中
