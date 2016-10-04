@@ -3,7 +3,7 @@ Document Synthesis Project Based on Symbolic Algebra System
 
 JSSST 大会発表に関するプロジェクトです。
 
-- [汎用 Newton-Raphson 法](https://github.com/wakita/symdoc/blob/master/kk.ipynb)
+- [汎用 Newton-Raphson 法](https://github.com/wakita/symdoc/blob/master/newtonraphson-jp.ipynb)
 
 近日公開予定。
 
