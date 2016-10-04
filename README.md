@@ -5,9 +5,8 @@ JSSST 大会発表に関するプロジェクトです。
 
 - [汎用 Newton-Raphson 法](https://github.com/wakita/symdoc/blob/master/newtonraphson-jp.ipynb)
 
-近日公開予定。
+- [力学モデルに基づいた無向グラフ可視化システム (Kamada-Kawai法)](https://github.com/wakita/symdoc/blob/master/kk.ipynb)
 
-- 力学モデルに基づいた無向グラフ可視化システム (Kamada-Kawai法)
 
 # 調整中
 
@@ -16,8 +15,9 @@ JSSST 大会発表に関するプロジェクトです。
 
 # 必要なソフトウェア
 
-- Jupyter Notebook
-- NumPy
-- Python 3
-- SciPy
-- SymPy開発版
+- Python 3 と以下のパッケージ
+    - NumPy: the fundamental package for scientific computing with Python
+    - SciPy: a Python-based ecosystem of open-source software for mathematics, science, and engineering
+    - mpmath: Python library for real and complex floating-point arithmetic with arbitrary precision
+    - SymPy開発版: a Python library for symbolic mathematic
+    - Jupyter Notebook:  a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text
