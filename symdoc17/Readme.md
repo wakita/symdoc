@@ -28,13 +28,33 @@ activate glvis
 conda install numpy matplotlib scipy sympy
 ~~~
 
-- numpy: 基本的な行列計算
+- [numpy: 基本的な行列計算](https://docs.scipy.org/doc/numpy/reference/)
 
 - matplotlib: グラフ生成
 
 - scipy: 科学技術計算
 
-- scipy: 数式処理
+- [sympy: 数式処理](http://docs.sympy.org/latest/): バージョンによって機能が異なるので，Google検索してドキュメントを見つけたときは，バージョンが最新版なことを確認して下さい．
+
+- [Scipy Lecture Notes](http://www.scipy-lectures.org/): Python で科学技術計算をするためのチュートリアル集．非常にうまくまとまっているので，研究室に所属する人には最初に学んでもらっている．
+
+    - [Sympy](http://www.scipy-lectures.org/packages/sympy.html): SymDoc に必須
+
+    - [数理最適化 --- 関数の最小化](http://www.scipy-lectures.org/advanced/mathematical_optimization/index.html)
+
+        Newton法が含まれています．
+
+    - [NumPyの基礎](http://www.scipy-lectures.org/intro/numpy/index.html)
+
+        行列計算
+
+    - [Matplotlibの基礎](http://www.scipy-lectures.org/intro/matplotlib/index.html)
+
+        グラフ描画
+
+    - [Scipyの基礎](http://www.scipy-lectures.org/intro/scipy.html)
+
+        科学技術計算
 
 ## 仮想環境の起動方法
 
