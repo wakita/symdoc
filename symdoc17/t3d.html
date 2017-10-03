@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>T3D (Transform 3D) for Python</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">T3D (Transform 3D) for Python</h1>
+</div>
+<h1 id="同次座標系-homogeneous-coordinate-system">同次座標系 (Homogeneous coordinate system)</h1>
+<p>三次元デカルト座標系(<em>Cartesian coordinate system</em>)における点の座標の<strong>同次座標</strong>(<em>Homogeneous coordinate</em>)は，任意の非零実数<span class="math inline">\(w\)</span>を用いて変換されます。</p>
+<p><span class="math display">\[Homogeneous\left(\left(\begin{matrix}x &amp; y &amp; z\end{matrix}\right), w\right) = \left(\begin{matrix}w x &amp; w y &amp; w z &amp; w\end{matrix}\right)\]</span></p>
+<p>同次座標を用いた座標系のことを<strong>同次座標系</strong>(<em>Homogeneous coordinate system</em>)と呼びます．</p>
+<p>逆に，同次座標をデカルト座標に変換することもできます。</p>
+<p><span class="math display">\[Cartesian\left(\left(\begin{matrix}w x &amp; w y &amp; w z &amp; w\end{matrix}\right)\right) = \left(\begin{matrix}x &amp; y &amp; z\end{matrix}\right)\]</span></p>
+<h1 id="モデル変換">モデル変換</h1>
+<h2 id="回転変換-operatornamerotate_xleft-theta-right-operatornamerotate_yleft-theta-right-operatornamerotate_zleft-theta-right">回転変換: <span class="math inline">\(\operatorname{Rotate_{X}}{\left (\theta \right )}, \operatorname{Rotate_{Y}}{\left (\theta \right )}, \operatorname{Rotate_{Z}}{\left (\theta \right )}\)</span></h2>
+<ul>
+<li><p>回転変換行列 (<span class="math inline">\(\operatorname{Rotate_{X}}{\left (\theta \right )}\)</span>) に同次座標を乗ずると，その座標を<span class="math inline">\(X\)</span>軸のまわりに<span class="math inline">\(\theta\)</span>だけ回転した点の同次座標を与えます．</p>
+<p><span class="math display">\[\operatorname{Rotate_{X}}{\left (\theta \right )} \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) = \left(\begin{matrix}1 &amp; 0 &amp; 0 &amp; 0\\0 &amp; \cos{\left (\theta \right )} &amp; \sin{\left (\theta \right )} &amp; 0\\0 &amp; - \sin{\left (\theta \right )} &amp; \cos{\left (\theta \right )} &amp; 0\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right) \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) = \left(\begin{matrix}w x\\w y \cos{\left (\theta \right )} + w z \sin{\left (\theta \right )}\\- w y \sin{\left (\theta \right )} + w z \cos{\left (\theta \right )}\\w\end{matrix}\right)\]</span></p></li>
+<li><p>回転変換行列 (<span class="math inline">\(\operatorname{Rotate_{Y}}{\left (\theta \right )}\)</span>) に同次座標を乗ずると，その座標を<span class="math inline">\(Y\)</span>軸のまわりに<span class="math inline">\(\theta\)</span>だけ回転した点の同次座標を与えます．</p>
+<p><span class="math display">\[\operatorname{Rotate_{Y}}{\left (\theta \right )} \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) = \left(\begin{matrix}\cos{\left (\theta \right )} &amp; 0 &amp; - \sin{\left (\theta \right )} &amp; 0\\0 &amp; 1 &amp; 0 &amp; 0\\\sin{\left (\theta \right )} &amp; 0 &amp; \cos{\left (\theta \right )} &amp; 0\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right) \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) = \left(\begin{matrix}w x \cos{\left (\theta \right )} - w z \sin{\left (\theta \right )}\\w y\\w x \sin{\left (\theta \right )} + w z \cos{\left (\theta \right )}\\w\end{matrix}\right)\]</span></p></li>
+<li><p>回転変換行列 (<span class="math inline">\(\operatorname{Rotate_{Z}}{\left (\theta \right )}\)</span>) に同次座標を乗ずると，その座標を<span class="math inline">\(Z\)</span>軸のまわりに<span class="math inline">\(\theta\)</span>だけ回転した点の同次座標を与えます．</p>
+<p><span class="math display">\[\operatorname{Rotate_{Z}}{\left (\theta \right )} \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) = \left(\begin{matrix}\cos{\left (\theta \right )} &amp; \sin{\left (\theta \right )} &amp; 0 &amp; 0\\- \sin{\left (\theta \right )} &amp; \cos{\left (\theta \right )} &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right) \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) = \left(\begin{matrix}w x \cos{\left (\theta \right )} + w y \sin{\left (\theta \right )}\\- w x \sin{\left (\theta \right )} + w y \cos{\left (\theta \right )}\\w z\\w\end{matrix}\right)\]</span></p></li>
+</ul>
+<hr />
+<p>では、ここで得られた変換<span class="math inline">\(\operatorname{Rotate_{X}}{\left (\theta \right )}\)</span>が確かに回転であることを確認してみましょう。この変換で点<span class="math inline">\(\mathbf{p_1}\)</span>が<span class="math inline">\(\mathbf{p_2}\)</span>に移ったものとします：</p>
+<span class="math display">\[\begin{align}
+\mathbf{p_1}^T &amp;= \left(\begin{matrix}x &amp; y &amp; z\end{matrix}\right) \\
+\mathbf{p_2}^T &amp;= (\operatorname{Rotate_{X}}{\left (\theta \right )} \mathbf{p_1})^T \\
+       &amp;= \left(\left(\begin{matrix}1 &amp; 0 &amp; 0 &amp; 0\\0 &amp; \cos{\left (\theta \right )} &amp; \sin{\left (\theta \right )} &amp; 0\\0 &amp; - \sin{\left (\theta \right )} &amp; \cos{\left (\theta \right )} &amp; 0\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right)\left(\begin{matrix}x\\y\\z\end{matrix}\right)\right)^T \\
+       &amp;= \left(\begin{matrix}x &amp; y \cos{\left (\theta \right )} + z \sin{\left (\theta \right )} &amp; - y \sin{\left (\theta \right )} + z \cos{\left (\theta \right )}\end{matrix}\right)
+\end{align}\]</span>
+<ol style="list-style-type: decimal">
+<li><p>変換前後でベクトルと原点の距離は変化しないこと</p>
+<span class="math display">\[\begin{align}
+\|\mathbf{p_1}\|^2 &amp;= \left\|\left(\begin{matrix}x &amp; y &amp; z\end{matrix}\right)^T\right\|^2 = x^{2} + y^{2} + z^{2} \\
+\|\mathbf{p_2}\|^2 &amp;= \left\|\left(\begin{matrix}x &amp; y \cos{\left (\theta \right )} + z \sin{\left (\theta \right )} &amp; - y \sin{\left (\theta \right )} + z \cos{\left (\theta \right )}\end{matrix}\right)^T\right\|^2 \\
+&amp;= x^{2} + y^{2} + z^{2}
+\end{align}\]</span></li>
+<li><p>変換前後のベクトルの差分が回転軸となるX軸と直交すること</p>
+<p><span class="math inline">\(\mathbf{p_1}\)</span>をX軸を中心として回転するとき、回転のあいだ<span class="math inline">\(\mathbf{p_1}\)</span>はX軸と直交する平面を移動します。したがって、移動後の<span class="math inline">\(\mathbf{p_2}\)</span>もそのX軸と直交する平面にあるはずです。<span class="math inline">\(\mathbf{p_1}, \mathbf{p_2}\)</span>がともにX軸と直交する平面上の点ということは、<span class="math inline">\((\mathbf{p_2} - \mathbf{p_1})\)</span>はこの平面上のベクトルということになるので、X軸と直交するはずです。</p>
+<p><span class="math display">\[
+(\mathbf{p_2} - \mathbf{p_1}, \mathbf{e_x}) = \left(\left(\begin{matrix}x\\y\\z\end{matrix}\right) - \left(\begin{matrix}x\\y \cos{\left (\theta \right )} + z \sin{\left (\theta \right )}\\- y \sin{\left (\theta \right )} + z \cos{\left (\theta \right )}\end{matrix}\right), \left(\begin{matrix}1\\0\\0\end{matrix}\right)\right) = 0
+\]</span></p>
+<p>内積が0なので直交していることが確認できました。</p></li>
+<li><p>回転角が<span class="math inline">\(\theta\)</span>であること</p>
+<p>X軸を中心として<span class="math inline">\(p\)</span>を<span class="math inline">\(\theta\)</span>回転して<span class="math inline">\(p&#39;\)</span>に移すということは、<span class="math inline">\(p\)</span>と<span class="math inline">\(p&#39;\)</span>のなす角度が<span class="math inline">\(\theta\)</span>というような気もしますが、実はそうではありません。ベクトル<span class="math inline">\(p\)</span>は円錐の表面を撫でるようにして<span class="math inline">\(p&#39;\)</span>に写るからです。<span class="math inline">\(\theta\)</span>となるのは、<span class="math inline">\(p\)</span>からX軸への垂線の足となる<span class="math inline">\(\mathbf{p_0}\)</span>について<span class="math inline">\(p\)</span>と<span class="math inline">\(p&#39;\)</span>がなす角度です。</p>
+<p>では、まず<span class="math inline">\(\mathbf{p_0}\)</span>を求めてみましょう。これをベクトルだと思うとX軸方向の単位ベクトル<span class="math inline">\(\mathbf{e_x}^T\)</span>と同じ向きで、長さが前述の垂線の足にあたる点と原点の距離です。この距離は<span class="math inline">\(p^T\)</span>と<span class="math inline">\(\mathbf{e_x}^T\)</span>の内積で与えられますので、結局<span class="math inline">\(\mathbf{p_0}^T = (\mathbf{p_1}^T, \mathbf{e_x}^T) \mathbf{e_x}^T = \left(\begin{matrix}x\\0\\0\end{matrix}\right)^T\)</span>となります。</p>
+<p>角度が<span class="math inline">\(\theta\)</span>であることは(<span class="math inline">\(\mathbf{p_1}-\mathbf{p_0}\)</span>)と(<span class="math inline">\(\mathbf{p_2}-\mathbf{p_0}\)</span>)の内積に関する性質について確認すればよいでしょう。</p>
+<span class="math display">\[\begin{align}
+((p - p_x)^T, (p&#39; - p_x)^T) &amp;= (\left(\begin{matrix}0 &amp; y &amp; z\end{matrix}\right), \left(\begin{matrix}0 &amp; y \cos{\left (\theta \right )} + z \sin{\left (\theta \right )} &amp; - y \sin{\left (\theta \right )} + z \cos{\left (\theta \right )}\end{matrix}\right)) \\
+    &amp;= y \left(y \cos{\left (\theta \right )} + z \sin{\left (\theta \right )}\right) + z \left(- y \sin{\left (\theta \right )} + z \cos{\left (\theta \right )}\right) \\
+    &amp;= \left(y^{2} + z^{2}\right) \cos{\left (\theta \right )}
+\end{align}\]</span>
+<p>一方、<span class="math inline">\(p-p_x\)</span>と<span class="math inline">\(p&#39;-p_x\)</span>のなす角が、その内積は<span class="math inline">\(\ell_1 \ell_2 \cos{\left (\theta \right )}\)</span>になるはずです。</p>
+<span class="math display">\[\begin{align}
+\ell_1 &amp;= \|p - p_x\| = \sqrt{y^{2} + z^{2}} \\
+\ell_2 &amp;= \|p&#39; - p_x\| = \sqrt{y^{2} + z^{2}} \\
+\ell_1 \ell_2 \cos{\left (\theta \right )} &amp;= \sqrt{y^{2} + z^{2}} \sqrt{y^{2} + z^{2}} \cos{\left (\theta \right )} = \left(y^{2} + z^{2}\right) \cos{\left (\theta \right )}
+\end{align}\]</span>
+<p>以上より<span class="math inline">\(((p-p_x)^T, (p&#39;-p_x)^T) = \ell_1 \ell_2 \cos{\left (\theta \right )}\)</span>が確認できました。</p></li>
+</ol>
+<h2 id="並行移動変換-operatornametranslateleft-t_xt_yt_z-right">並行移動変換: <span class="math inline">\(\operatorname{Translate}{\left (t_{x},t_{y},t_{z} \right )}\)</span></h2>
+<p>以下の行列 <span class="math inline">\(\operatorname{Translate}{\left (t_{x},t_{y},t_{z} \right )}\)</span> に同次座標を乗じたものは，デカルト座標を<span class="math inline">\((t_{x}, t_{y}, t_{z})\)</span>だけ平行移動したものの同次座標を与えます．</p>
+<p>ここで平行移動を表す行列<span class="math inline">\(\operatorname{Translate}{\left (t_{x},t_{y},t_{z} \right )}\)</span>は以下で与えられます．</p>
+<p><span class="math display">\[ \operatorname{Translate}{\left (t_{x},t_{y},t_{z} \right )} = \left(\begin{matrix}1 &amp; 0 &amp; 0 &amp; t_{x}\\0 &amp; 1 &amp; 0 &amp; t_{y}\\0 &amp; 0 &amp; 1 &amp; t_{z}\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right) \]</span></p>
+<p>では，本当に平行移動になっているか確認してみましょう．</p>
+<span class="math display">\[\begin{align}
+\operatorname{Translate}{\left (t_{x},t_{y},t_{z} \right )}Homogeneous\left(\left(\begin{matrix}x\\y\\z\end{matrix}\right)\right)
+    &amp;= \left(\begin{matrix}1 &amp; 0 &amp; 0 &amp; t_{x}\\0 &amp; 1 &amp; 0 &amp; t_{y}\\0 &amp; 0 &amp; 1 &amp; t_{z}\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right) \left(\begin{matrix}w x\\w y\\w z\\w\end{matrix}\right) \\
+    &amp;= \left(\begin{matrix}w \left(t_{x} + x\right)\\w \left(t_{y} + y\right)\\w \left(t_{z} + z\right)\\w\end{matrix}\right) \\
+    &amp;= Homogeneous\left(\left(\begin{matrix}x\\y\\z\end{matrix}\right) + \left(\begin{matrix}t_{x}\\t_{y}\\t_{z}\end{matrix}\right)\right)
+\end{align}\]</span>
+<h3 id="視野変換-lookat">視野変換 (LookAt)</h3>
+<p>視野変換は<strong>全体座標系</strong> (<em>Global coordinate system</em>)に配置されたオブジェクトを観察者の立場から眺めたときの様子，すなわち<strong>視野座標系</strong>(<em>Viewing coordinate system</em>)に変換します．観察者の立ち位置を表現するために観察者の視点(<em>eye</em>)，観察者の視線の先の点(<em>center</em>)，そして観察者の頭の向き(<em>up</em>)を与えます．</p>
+<p>視野変換は全体座標系を視点に平行移動する変換<span class="math inline">\(LookAtTranslate\)</span>と，視線の向きを<span class="math inline">\(Z\)</span>軸方向から視線の向きに回転する 変換<span class="math inline">\(LookAtRotate\)</span>を合成(<span class="math inline">\(LookAtRotate \times LookAtTranslate\)</span>)したものと考えられます．</p>
+<h3 id="視点へのカメラの移動-lookattranslate">視点へのカメラの移動 (LookAtTranslate)</h3>
+<p>最初の変換は視点(<span class="math inline">\(I\)</span>; 眼の eye になぞらえてこの記号を使います)を原点に平行移動します．移動のベクトルは<span class="math inline">\((0 - I) = -I\)</span>ですので：</p>
+<p><span class="math display">\[LookAtTranslate = \operatorname{Translate}\left(-\left(\begin{matrix}I_{x}\\I_{y}\\I_{z}\end{matrix}\right)\right) = \left(\begin{matrix}1 &amp; 0 &amp; 0 &amp; - I_{x}\\0 &amp; 1 &amp; 0 &amp; - I_{y}\\0 &amp; 0 &amp; 1 &amp; - I_{z}\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right)\]</span></p>
+<p>念のため、<span class="math inline">\(LookAtTranslate\)</span>が視点(<span class="math inline">\(I\)</span>)を原点に移動することを確認しましょう．</p>
+<span class="math display">\[\begin{align}
+LookAtTranslate \times Homogeneous\left(\left(\begin{matrix}I_{x}\\I_{y}\\I_{z}\end{matrix}\right)\right) &amp;= \left(\begin{matrix}1 &amp; 0 &amp; 0 &amp; - I_{x}\\0 &amp; 1 &amp; 0 &amp; - I_{y}\\0 &amp; 0 &amp; 1 &amp; - I_{z}\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right) \times \left(\begin{matrix}I_{x}\\I_{y}\\I_{z}\\1\end{matrix}\right) \\
+    &amp;= \left(\begin{matrix}0\\0\\0\\1\end{matrix}\right)
+\end{align}\]</span>
+<p>確かに原点に移動しました．</p>
+</body>
+</html>
